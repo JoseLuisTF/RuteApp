@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}
+    RuteApp
+{% endblock %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card bg-info">
+                <div class="card-body">
+                    <h2 class="text-white">Choferes:</h2>
+                    <h1 style="text-align: center" class="mb-1 text-white">{{ cantidades.choferes }}</h1>
+                    <a style="margin-top: 20px" href="{% url 'chofer_listar' %}" class="btn btn-rounded btn-light">Ver Choferes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card bg-secondary">
+                <div class="card-body">
+                    <h2 class="text-white">Propietarios:</h2>
+                    <h1 style="text-align: center" class="mb-1 text-white" >{{ cantidades.propietarios }}</h1>
+                    <a style="margin-top: 20px" href="{% url 'propietario_listar' %}" class="btn btn-rounded btn-light">Ver Propietarios</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card bg-success">
+                <div class="card-body">
+                    <h2 class="text-white">Vehiculos:</h2>
+                    <h1 style="text-align: center" class="mb-1 text-white">{{ cantidades.vehiculos }}</h1>
+                    <a style="margin-top: 20px" href="{% url 'vehiculo_listar' %}" class="btn btn-rounded btn-light">Ver Vehiculos</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+            <div class="card bg-warning">
+                <div class="card-body">
+                    <h2 class="text-white">Rutas:</h2>
+                    <h1 style="text-align: center" class="mb-1 text-white">{{ cantidades.rutas }}</h1>
+                    <a style="margin-top: 20px" href="{% url 'ruta_listar' %}" class="btn btn-rounded btn-light">Ver Rutas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+    <div class="accrodion-regular">
+        <div id="accordion3">
+
+            <div class="card">
+                <div class="card-header" id="headingSeven">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSeven"
+                                aria-expanded="true" aria-controls="collapseSeven">
+                            <span class="fas fa-angle-down mr-3"></span>Informacion Personal
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven" data-parent="#accordion3">
+                    <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped table-condensed table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <th>Documento</th>
+                                        <td>{{ chofer.cedula }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <td>{{ chofer.nombre }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Apellido</th>
+                                        <td>{{ chofer.apellido }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fecha de Nacimiento</th>
+                                        <td>{{ chofer.fecha_nacimiento }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tipo de Chofer</th>
+                                        <td>{{ chofer.tipo_chofer }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a style="margin-top: 20px" href="{% url 'chofer_actualizar' chofer.pk %}"
+                               class="btn btn-warning btn-xs">Editar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-header" id="headingEight">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight"
+                                aria-expanded="false" aria-controls="collapseEight">
+                            <span class="fas fa-angle-down mr-3"></span>Informacion Licencia
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion3">
+                {% if licencias %}
+                    {% for licencia in licencias %}
+                        <div class="card-body">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped table-condensed table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <th>Licencia</th>
+                                            <td>
+                                                {{ licencia.num_licencia }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Categoria</th>
+                                            <td>{{ licencia.categoria }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Fecha Expedicion</th>
+                                            <td>{{ licencia.fec_expedicion }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Fecha Vencimiento</th>
+                                            <td>{{ licencia.fec_vencimiento }}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Oficina Expedida</th>
+                                            <td>{{ licencia.oficia_expedida }}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <a style="margin-top: 20px" href="{% url 'chofer_actualizar' chofer.pk %}"
+                                   class="btn btn-warning btn-xs">Editar</a>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                    <h3>Este chofer no tiene una Licencia asignado</h3>
+                                <a href="#"
+                                   class="btn btn-primary btn-xs">Asignar</a>
+                {% endif %}
+                </div>
+            </div>
+
+
+            <div class="card mb-2">
+
+                <div class="card-header" id="headingNine">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseNine"
+                                aria-expanded="false" aria-controls="collapseNine">
+                            <span class="fas fa-angle-down mr-3"></span>Informacion Vehiculo
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion3">
+                    <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            {% if asignados %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped table-condensed table-bordered">
+                                        {% for asignado in asignados %}
+                                            <tbody>
+                                            <tr>
+                                                <th>Placa</th>
+                                                <td>{{ asignado.vehiculo_id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Fecha Asignacion</th>
+                                                <td>{{ asignado.fecha_asignacion }}</td>
+                                            </tr>
+                                            </tbody>
+
+
+
+                                            </table>
+                                            </div>
+                                            <a style="margin-top: 20px"
+                                               href="{% url 'chofer_eliminarAsignacion' asignado.pk %}"
+                                               class="btn btn-danger btn-xs">Eliminar</a>
+                                        {% endfor %}
+                            {% else %}
+                                <h3>Este chofer no tiene un vehiculo asignado</h3>
+                                <a href="{% url 'chofer_asignar' chofer.pk %}"
+                                   class="btn btn-primary btn-xs">Asignar</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card mb-2">
+                <div class="card-header" id="headingTen">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTen"
+                                aria-expanded="false" aria-controls="collapseNine">
+                            <span class="fas fa-angle-down mr-3"></span>Informacion Horario
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion3">
+                    <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            {% if horarios %}
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped table-condensed table-bordered">
+                                        {% for horario in horarios %}
+                                            <tbody>
+                                            <tr>
+                                                <th>Horario</th>
+                                                <td>{{ horario.horario_turno }}</td>
+                                            </tr>
+                                            </tbody>
+                                            </table>
+                                            </div>
+                                            <a style="margin-top: 20px"
+                                               href="{% url 'chofer_actualizarHorario' horario.pk %}"
+                                               class="btn btn-warning btn-xs">Editar</a>
+                                        {% endfor %}
+                            {% else %}
+                                <h3>Este chofer no tiene un horario asignado</h3>
+                                <a href="{% url 'chofer_asignarHorario' chofer.pk %}" class="btn btn-primary btn-xs">Asignar</a>
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a style="margin-top: 20px" href="{% url 'chofer_listar' %}" class="btn btn-dark">Atras</a>
+        <a style="margin-top: 20px" href="{% url 'chofer_eliminar' chofer.pk %}" class="btn btn-danger">Eliminar</a>
+    </div>
+
+{% endblock %}

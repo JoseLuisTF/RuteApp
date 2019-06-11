@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <h3>¿Desea eliminar la Asignacion Chofer {{ rutaasignada.chofer_id }} Vehiculo {{ rutaasignada.vehiculo_id }}?</h3>
+        <button class="btn btn-danger" type="submit">Sí, eliminar</button>
+        <a class="btn btn-dark" href="{% url 'ruta_listar' %}">Cancelar</a>
+    </form>
+{% endblock %}

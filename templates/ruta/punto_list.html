@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}
+Listado Puntos
+{% endblock %}
+{% block content %}
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card">
+                            <h5 class="card-header">Listado Puntos</h5>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered first">
+                                    {% if object_list %}
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nombre</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for punto in object_list %}
+                                                 <tr>
+                                                    <td>{{ punto.pk }}</td>
+                                                    <td>{{ punto.nom_punto }}</td>
+                                                    <td style="text-align: center">
+                                                        <a href="{% url 'punto_actualizar' punto.pk %}" class="btn btn-sm btn-outline-warning">Editar</a>
+                                                        <a href="{% url 'punto_eliminar' punto.pk %}" class="btn btn-sm btn-outline-danger">
+                                                            <i class="far fa-trash-alt"></i>
+                                                        </a></td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                             <h4>No hay registros de Puntos</h4>
+                                        </tbody>
+                                    {% endif %}
+                                    </table>
+                                </div>
+                                                                <a style="margin-top: 20px" href="{% url 'punto_crear' %}" class="btn btn-primary btn-xs">Agregar</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+{% endblock %}

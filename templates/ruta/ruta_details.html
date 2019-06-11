@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+    <div class="accrodion-regular">
+        <div id="accordion3">
+
+            <div class="card">
+                <div class="card-header" id="headingSeven">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSeven"
+                                aria-expanded="true" aria-controls="collapseSeven">
+                            <span class="fas fa-angle-down mr-3"></span>Informacion Ruta
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven" data-parent="#accordion3">
+                    <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped table-condensed table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <th>Descripcion</th>
+                                        <td>{{ ruta.descripcion_ruta }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Resolucion</th>
+                                        <td>{{ ruta.resolucion }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a style="margin-top: 20px" href="{% url 'ruta_actualizar' ruta.pk %}"
+                               class="btn btn-warning btn-xs">Editar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-2">
+                <div class="card-header" id="headingEight">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight"
+                                aria-expanded="false" aria-controls="collapseEight">
+                            <span class="fas fa-angle-down mr-3"></span>Informacion Puntos
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion3">
+                    <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped table-condensed table-bordered">
+                                    {% if puntos %}
+                                        {% for punto in puntos %}
+                                            <tbody>
+                                            <tr>
+                                                <th>Tipo de Punto</th>
+                                                <td>{{ punto.tipo_punto }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Punto</th>
+                                                <td>
+                                                    {{ punto.punto }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                </th>
+                                                <td>
+
+                                                    <a href="{% url 'puntoRuta_actualizar' punto.pk %}"
+                                                       class="btn btn-warning btn-xs">Editar</a>
+                                                    <a href="{% url 'puntoRuta_eliminar' punto.pk %}"
+                                                       class="btn btn-danger btn-xs">Eliminar</a>
+
+
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        {% endfor %}
+                                    {% else %}
+                                        <h3>Esta Ruta no tiene un Puntos Asignados</h3>
+                                    {% endif %}
+                                </table>
+                            </div>
+                            <a style="margin-top: 20px" href="{% url 'punto_asignar' ruta.pk %}"
+                               class="btn btn-primary btn-xs">Asignar</a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="card mb-3">
+                <div class="card-header" id="headingNine">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseNine"
+                                aria-expanded="false" aria-controls="collapseNine">
+                            <span class="fas fa-angle-down mr-3"></span>Vehiculos - Choferes Asignados
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion3">
+                    <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped table-condensed table-bordered">
+                                    {% if asignados %}
+                                        {% for asignado in asignados %}
+                                            <tbody>
+                                            <tr>
+                                                <th>Chofer</th>
+                                                <td>{{ asignado.chofer_vehiculo.chofer_id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Vehiculo</th>
+                                                <td>
+                                                    {{ asignado.chofer_vehiculo.vehiculo_id }}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                </th>
+                                                <td>
+
+                                                    <a href="{% url 'rutaAsignada_eliminar' asignado.pk %}"
+                                                       class="btn btn-danger btn-xs">Eliminar</a>
+
+
+                                                </td>
+
+                                            </tr>
+                                            </tbody>
+                                        {% endfor %}
+                                    {% else %}
+                                        <h3>Esta Ruta no tiene un Choferes Vehiculos ASignados</h3>
+                                    {% endif %}
+                                </table>
+                            </div>
+                            <a style="margin-top: 20px" href="{% url 'rutaAsignada_crear' ruta.pk %}"
+                               class="btn btn-primary btn-xs">Asignar</a>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="text-center">
+        <a style="margin-top: 20px" href="{% url 'ruta_listar' %}" class="btn btn-dark">Atras</a>
+        <a style="margin-top: 20px" href="{% url 'ruta_eliminar' ruta.pk %}" class="btn btn-danger">Eliminar</a>
+    </div>
+
+{% endblock %}

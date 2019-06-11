@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post">
+	{% csrf_token %}
+    <h3>¿Desea eliminar el registro Punto {{punto.nom_punto}}?</h3>
+	<button class="btn btn-danger" type="submit">Sí, eliminar</button>
+	<a class= "btn btn-dark" href="{% url 'punto_listar' %}">Cancelar</a>
+</form>
+{% endblock %}

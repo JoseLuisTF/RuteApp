@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}
+    Listado Choferes
+{% endblock %}
+{% block content %}
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+            <h5 class="card-header">Listado Choferes</h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered first">
+                        {% if object_list %}
+                            <thead>
+                            <tr>
+                                <th>Cedula</th>
+                                <th>Nombre</th>
+                                <th>Tipo de Chofer</th>
+                                <th>Vehiculo</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for chofer in object_list %}
+                                <tr>
+                                    <td>{{ chofer.cedula }}</td>
+                                    <td>{{ chofer.nombre }} {{ chofer.apellido }}</td>
+                                    <td>{{ chofer.tipo_chofer }}</td>
+                                    <td>{{ chofer.chofervehiculo.vehiculo_id }}</td>
+                                    <td style="text-align: center">
+                                        <a href="{% url 'chofer_detalles' chofer.pk %}"
+                                           class="btn btn-sm btn-outline-primary">Info</a>
+                                        <a href="{% url 'chofer_actualizar' chofer.pk %}"
+                                           class="btn btn-sm btn-outline-warning">Editar</a>
+                                        <a href="{% url 'chofer_eliminar' chofer.pk %}"
+                                           class="btn btn-sm btn-outline-danger">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a></td>
+                                </tr>
+                            {% endfor %}
+                            {% else %}
+                            <h4>No hay registros de Choferes</h4>
+                            </tbody>
+                        {% endif %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

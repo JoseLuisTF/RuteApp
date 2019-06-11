@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}
+    Asignar Horario a Chofer
+{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-space btn-primary">Asignar</button>
+        <a href="{% url 'chofer_listar' %}" class="btn btn-space btn-secondary">Cancelar</a>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+    <div class="accrodion-regular">
+    <div id="accordion3">
+
+        <div class="card">
+            <div class="card-header" id="headingSeven">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true"aria-controls="collapseSeven">
+                     <span class="fas fa-angle-down mr-3"></span>Informacion Vehiculo
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven" data-parent="#accordion3">
+                <div class="card-body">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-responsive">
+                        <table  class="table table-hover table-striped table-condensed table-bordered">
+                            <tbody>
+                                 <tr>
+                                     <th>Placa</th>
+                                     <td>{{ vehiculo.placa }}</td>
+                                 </tr>
+                                <tr>
+                                    <th>Marca</th>
+                                    <td>{{ vehiculo.marca }}</td>
+                                </tr>
+                                 <tr>
+                                     <th>Modelo</th>
+                                     <td>{{ vehiculo.modelo }}</td>
+                                 </tr>
+                                <tr>
+                                    <th>Numero Puertas</th>
+                                    <td>{{ vehiculo.nPuertas }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Capacidad Pasajeros</th>
+                                    <td>{{ vehiculo.capacidad }}</td>
+                                </tr>
+                            <tr>
+                                    <th>Numero Motor</th>
+                                    <td>{{ vehiculo.num_motor }}</td>
+                                </tr>
+                            <tr>
+                                    <th>Numero Chasis</th>
+                                    <td>{{ vehiculo.num_chasis }}</td>
+                                </tr>
+                            <tr>
+                                    <th>Tipo Vehiculo</th>
+                                    <td>{{ vehiculo.tipo_vehiculo }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                        <a style="margin-top: 20px" href="{% url 'vehiculo_actualizar' vehiculo.pk %}" class="btn btn-warning btn-xs">Editar</a>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-2">
+            <div class="card-header" id="headingEight">
+                <h5 class="mb-0">
+                   <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                     <span class="fas fa-angle-down mr-3"></span>Informacion Propietario
+                 </button>
+              </h5>
+            </div>
+            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion3">
+                <div class="card-body">
+                   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="table-responsive">
+                        <table  class="table table-hover table-striped table-condensed table-bordered">
+                            {% if propietario %}
+                            {% for propietario in propietarios %}
+                                {% for duenio in duenios %}
+                            <tbody>
+                            <tr>
+                                    <th>Nombre</th>
+                                    <td>{{ duenio.nombre}} {{ duenio.apellido }}</td>
+                                </tr>
+                                 <tr>
+                                     <th>Cedula</th>
+                                     <td>
+                                         {{ propietario.propietario_id }}
+                                     </td>
+                                 </tr>
+
+                                <tr>
+                                    <th>Fecha Compra</th>
+                                    <td>{{ propietario.fecha_compra}}</td>
+                                </tr>
+                            </tbody>
+                                {% endfor %}
+                                {% endfor %}
+                                {% else %}
+                           <h3>Este vehiculo no tiene un Propietario Asignado</h3>
+                            {% endif %}
+                        </table>
+                    </div>
+                                                            <a href="{% url 'propietarioVehiculo_crear' vehiculo.pk%}" class="btn btn-primary btn-xs">Asignar</a>
+
+                </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+
+        </div>
+</div>
+
+    <div class="text-center">
+        <a style="margin-top: 20px" href="{% url 'vehiculo_listar' %}" class="btn btn-dark">Atras</a>
+        <a style="margin-top: 20px" href="{% url 'vehiculo_eliminar' vehiculo.pk %}" class="btn btn-danger">Eliminar</a>
+    </div>
+
+{% endblock %}
