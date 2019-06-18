@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*npf%op=zs-qv$vgtr2!*^i!@*#2cy8me1+hwbqb#=nzo$rc#-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['joseluistf.pythonanywhere.com']
 
 
 # Application definition
@@ -78,22 +78,14 @@ WSGI_APPLICATION = 'RuteApp.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'sqlite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    'default': { # le coloco default para poder usar MySQL
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ruteapp',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'joseluistf$ruteapp',
+            'USER': 'joseluistf',
+            'PASSWORD': '9a8fac91',
+            'HOST': 'joseluistf.mysql.pythonanywhere-services.com',
         }
     }
-}
 
 
 # Password validation
@@ -133,7 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+STATI_ROOT = '/home/joseluistf/RuteApp/static'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
